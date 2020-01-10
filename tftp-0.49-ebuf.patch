@@ -1,0 +1,12 @@
+diff -up tftp-hpa-0.49/tftpd/tftpd.c.ebuf tftp-hpa-0.49/tftpd/tftpd.c
+--- tftp-hpa-0.49/tftpd/tftpd.c.ebuf	2011-07-14 14:36:12.378896493 +0200
++++ tftp-hpa-0.49/tftpd/tftpd.c	2011-07-14 14:37:13.440920359 +0200
+@@ -1219,7 +1219,7 @@ static int set_timeout(char *val, char *
+ /* Similar, but in microseconds.  We allow down to 10 ms. */
+ static int set_utimeout(char *val, char **ret)
+ {
+-    static char b_ret[4];
++    static char b_ret[32];
+     unsigned long to;
+     char *vend;
+ 

@@ -1,7 +1,7 @@
 Summary: The client for the Trivial File Transfer Protocol (TFTP)
 Name: tftp
 Version: 0.49
-Release: 5.1%{?dist}
+Release: 7%{?dist}
 License: BSD
 Group: Applications/Internet
 Source0: http://www.kernel.org/pub/software/network/tftp/tftp-hpa-%{version}.tar.bz2
@@ -12,6 +12,8 @@ Patch2: tftp-hpa-0.39-tzfix.patch
 Patch3: tftp-0.42-tftpboot.patch
 Patch4: tftp-0.49-chk_retcodes.patch
 Patch5: tftp-hpa-0.49-fortify-strcpy-crash.patch
+Patch6: tftp-0.49-stats.patch
+Patch7: tftp-0.49-ebuf.patch
 
 BuildRequires: tcp_wrappers-devel readline-devel
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -45,6 +47,8 @@ enabled unless it is expressly needed.  The TFTP server is run from
 %patch3 -p1 -b .tftpboot
 %patch4 -p1 -b .chk_retcodes
 %patch5 -p1 -b .fortify-strcpy-crash
+%patch6 -p1 -b .stats
+%patch7 -p1 -b .ebuf
 
 %build
 
@@ -90,6 +94,13 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_mandir}/man8/*
 
 %changelog
+* Mon Jul 18 2011 Jiri Skala <jskala@redhat.com> - 0.49-7
+- Resolves: #714240 - rebuild for fastrack
+
+* Thu Jul 14 2011 Jiri Skala <jskala@redhat.com> - 0.49-6
+- Resolves: #655830 - transferring small files using -v returns strange values
+- Resolves: #714240 - utimeout option parsing buffer overflow
+
 * Mon Nov 30 2009 Dennis Gregorovic <dgregor@redhat.com> - 0.49-5.1
 - Rebuilt for RHEL 6
 
