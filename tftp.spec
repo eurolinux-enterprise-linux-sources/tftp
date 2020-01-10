@@ -1,7 +1,7 @@
 Summary: The client for the Trivial File Transfer Protocol (TFTP)
 Name: tftp
 Version: 0.49
-Release: 7%{?dist}
+Release: 8%{?dist}
 License: BSD
 Group: Applications/Internet
 Source0: http://www.kernel.org/pub/software/network/tftp/tftp-hpa-%{version}.tar.bz2
@@ -14,6 +14,7 @@ Patch4: tftp-0.49-chk_retcodes.patch
 Patch5: tftp-hpa-0.49-fortify-strcpy-crash.patch
 Patch6: tftp-0.49-stats.patch
 Patch7: tftp-0.49-ebuf.patch
+Patch8: tftp-0.49-enhanced-logging.patch
 
 BuildRequires: tcp_wrappers-devel readline-devel
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -49,6 +50,7 @@ enabled unless it is expressly needed.  The TFTP server is run from
 %patch5 -p1 -b .fortify-strcpy-crash
 %patch6 -p1 -b .stats
 %patch7 -p1 -b .ebuf
+%patch8 -p1 -b .enhanced-logging
 
 %build
 
@@ -94,6 +96,9 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_mandir}/man8/*
 
 %changelog
+* Wed Jan 20 2016 Jan Synáček <jsynacek@redhat.com> - 0.49-8
+- enhance in.tftpd logging capabilities (#917817)
+
 * Mon Jul 18 2011 Jiri Skala <jskala@redhat.com> - 0.49-7
 - Resolves: #714240 - rebuild for fastrack
 
