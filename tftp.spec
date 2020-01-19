@@ -4,7 +4,7 @@
 Summary: The client for the Trivial File Transfer Protocol (TFTP)
 Name: tftp
 Version: 5.2
-Release: 11%{?dist}
+Release: 12%{?dist}
 License: BSD
 Group: Applications/Internet
 URL: http://www.kernel.org/pub/software/network/tftp/
@@ -34,17 +34,16 @@ and should not be enabled unless it is expressly needed.
 %package server
 Group: System Environment/Daemons
 Summary: The server for the Trivial File Transfer Protocol (TFTP)
-Requires: xinetd systemd-units
-Requires(post): /sbin/service, systemd-units
-Requires(postun): /sbin/service, systemd-units
+Requires: systemd-units
+Requires(post): systemd-units
+Requires(postun): systemd-units
 
 %description server
 The Trivial File Transfer Protocol (TFTP) is normally used only for
 booting diskless workstations.  The tftp-server package provides the
 server for TFTP, which allows users to transfer files to and from a
 remote machine. TFTP provides very little security, and should not be
-enabled unless it is expressly needed.  The TFTP server is run from
-%{_sysconfdir}/xinetd.d/tftp, and is disabled by default.
+enabled unless it is expressly needed.
 
 %prep
 %setup -q -n tftp-hpa-%{version} 
@@ -81,13 +80,13 @@ install -p -m 644 %SOURCE1 ${RPM_BUILD_ROOT}%{_unitdir}
 install -p -m 644 %SOURCE2 ${RPM_BUILD_ROOT}%{_unitdir}
 
 %post server
-%systemd_post tftp.service
+%systemd_post tftp.socket
 
 %preun server
-%systemd_preun tftp.service
+%systemd_preun tftp.socket
 
 %postun server
-%systemd_postun_with_restart tftp.service
+%systemd_postun_with_restart tftp.socket
 
 
 %clean
@@ -107,6 +106,10 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_unitdir}/*
 
 %changelog
+* Tue Apr 28 2015 Jan Synáček <jsynacek@redhat.com> - 5.2-12
+- remove unnecessary installation dependency on xinetd(#1136866)
+- improve systemd unit files(#1167777)
+
 * Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 5.2-11
 - Mass rebuild 2014-01-24
 
