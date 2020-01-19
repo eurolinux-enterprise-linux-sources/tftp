@@ -4,7 +4,7 @@
 Summary: The client for the Trivial File Transfer Protocol (TFTP)
 Name: tftp
 Version: 5.2
-Release: 13%{?dist}
+Release: 22%{?dist}
 License: BSD
 Group: Applications/Internet
 URL: http://www.kernel.org/pub/software/network/tftp/
@@ -22,6 +22,8 @@ Patch7: tftp-hpa-0.49-stats.patch
 Patch8: tftp-hpa-5.2-pktinfo.patch
 Patch9: tftp-doc.patch
 Patch10: tftp-enhanced-logging.patch
+Patch11: tftp-rfc7440-windowsize.patch
+Patch12: tftp-rewrite-macro.patch
 
 BuildRequires: tcp_wrappers-devel readline-devel autoconf systemd-units
 
@@ -58,6 +60,8 @@ enabled unless it is expressly needed.
 %patch8 -p1 -b .pktinfo
 %patch9 -p1 -b .doc
 %patch10 -p1 -b .logging
+%patch11 -p1 -b .windowsize
+%patch12 -p1 -b .rewrite-macro
 
 %build
 autoreconf
@@ -108,6 +112,33 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_unitdir}/*
 
 %changelog
+* Wed Feb  7 2018 Jan Synáček <jsynacek@redhat.com> - 5.2-22
+- re: implement RFC7440 TFTP Windowsize Option (#1328827)
+
+* Wed Feb  7 2018 Jan Synáček <jsynacek@redhat.com> - 5.2-21
+- re: implement RFC7440 TFTP Windowsize Option (#1328827)
+
+* Tue Jan 23 2018 Jan Synáček <jsynacek@redhat.com> - 5.2-20
+- re: implement RFC7440 TFTP Windowsize Option (#1328827)
+
+* Tue Jan  9 2018 Jan Synáček <jsynacek@redhat.com> - 5.2-19
+- re: implement RFC7440 TFTP Windowsize Option (#1328827)
+
+* Tue Nov 28 2017 Jan Synáček <jsynacek@redhat.com> - 5.2-18
+- re: implement RFC7440 TFTP Windowsize Option (#1328827)
+
+* Thu Nov 16 2017 Jan Synáček <jsynacek@redhat.com> - 5.2.17
+- re: implement RFC7440 TFTP Windowsize Option (#1328827)
+
+* Mon Sep 11 2017 Jan Synáček <jsynacek@redhat.com> - 5.2-16
+- inconsistent --mapfile / --map-file option spelling in manual (#1490139)
+
+* Tue Sep  5 2017 Jan Synáček <jsynacek@redhat.com> - 5.2-15
+- memory corruption in tftpd when using filename remapping (#1485943)
+
+* Mon Aug 14 2017 Jan Synáček <jsynacek@redhat.com> - 5.2-14
+- implement RFC7440 TFTP Windowsize Option (#1328827)
+
 * Wed Mar  2 2016 Jan Synáček <jsynacek@redhat.com> - 5.2-13
 - enhance in.tftpd logging capabilities (#1311092)
 
