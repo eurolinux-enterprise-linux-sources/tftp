@@ -25,21 +25,3 @@
  Specify the use of filename remapping.  The
  .I remap-file
  is a file containing the remapping rules.  See the section on filename
-@@ -243,7 +243,7 @@ option, but crash with an error if they
- accepted by the server.
- .SH "FILENAME REMAPPING"
- The
--.B \-\-mapfile
-+.B \-\-map\-file
- option specifies a file which contains filename remapping rules.  Each
- non-comment line (comments begin with hash marks,
- .BR # )
-@@ -395,7 +395,7 @@ flag is used to set up a chroot() enviro
- once a connection has been set up.
- .PP
- Finally, the filename remapping
--.RB ( \-\-mapfile
-+.RB ( \-\-map\-file
- flag) support can be used to provide a limited amount of additional
- access control.
- .SH "CONFORMING TO"
